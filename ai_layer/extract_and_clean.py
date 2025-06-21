@@ -5,13 +5,6 @@ import tempfile
 import re
 from collections import Counter
 
-
-
-import os
-import fitz  # PyMuPDF
-import pytesseract
-import tempfile
-
 def typed_ocr_extract(file_path: str) -> str:
     zoom = 4  # Higher zoom improves OCR accuracy (4x ~ 300 DPI)
     mat = fitz.Matrix(zoom, zoom)

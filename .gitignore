@@ -1,3 +1,4 @@
 *.env
 ai_layer/*.pdf
 *.txt
+.git/*
