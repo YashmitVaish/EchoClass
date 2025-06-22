@@ -5,10 +5,8 @@ import tempfile
 import re
 from collections import Counter
 
-#img preprocessing will be implemented soon
-
 def typed_ocr_extract(file_path: str) -> str:
-    zoom = 4  
+    zoom = 8
     mat = fitz.Matrix(zoom, zoom)
     text_data = ''
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -22,7 +20,7 @@ def typed_ocr_extract(file_path: str) -> str:
         doc.close()
     return text_data.strip()
 
-def handwrittern_extracter(file_path: str) -> str: #easy ocr implementation
+def handwrittern_extracter(file_path: str):
     pass
 
 def normalize_line(line):
