@@ -1,9 +1,3 @@
-'''
-import sys
-import io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-
-'''
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.output_parsers import StrOutputParser
@@ -70,8 +64,7 @@ def clean_chunks_list(chunks: list[str]) -> list[str]:
     cleaned = [clean_chunk(c) for c in chunks]
     return [c for c in cleaned if c] 
 
-
-def summariser(input_chunks : list) -> list:
+def summariser(input_chunks : list) -> list: #need to throttle for >30 req / min
 
     summaries = []
 
@@ -99,7 +92,6 @@ def summariser(input_chunks : list) -> list:
             ]
     )
     chain = prompt | llm | StrOutputParser()
-
 
     for input_chunk in input_chunks:
           

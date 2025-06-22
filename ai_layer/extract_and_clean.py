@@ -23,7 +23,7 @@ def typed_ocr_extract(file_path: str) -> str:
     return text_data.strip()
 
 def handwrittern_extracter(file_path: str) -> str: #easy ocr implementation
-    pass 
+    pass
 
 def normalize_line(line):
     return re.sub(r'\\d+', '', re.sub(r'\\W+', '', line.strip().lower()))
