@@ -5,32 +5,25 @@ import tempfile
 import re
 from collections import Counter
 
+#img preprocessing will be implemented soon
+
 def typed_ocr_extract(file_path: str) -> str:
-    zoom = 4  # Higher zoom improves OCR accuracy (4x ~ 300 DPI)
+    zoom = 4  
     mat = fitz.Matrix(zoom, zoom)
-
     text_data = ''
-
     with tempfile.TemporaryDirectory() as temp_dir:
         doc = fitz.open(file_path)
-
         for i, page in enumerate(doc):
-            try:
-                # Render page to high-res image
-                pix = page.get_pixmap(matrix=mat)
-                img_path = os.path.join(temp_dir, f"page_{i+1}.png")
-                pix.save(img_path)
-
-                # OCR image to text
-                text = pytesseract.image_to_string(img_path)
-                text_data += text + '\n'
-
-            except Exception as e:
-                print(f"[ERROR] Page {i+1} failed: {e}")
-
+            pix = page.get_pixmap(matrix=mat)
+            img_path = os.path.join(temp_dir, f"page_{i+1}.png")
+            pix.save(img_path)
+            text = pytesseract.image_to_string(img_path)
+            text_data += text + '\n'
         doc.close()
-
     return text_data.strip()
+
+def handwrittern_extracter(file_path: str) -> str: #easy ocr implementation
+    pass 
 
 def normalize_line(line):
     return re.sub(r'\\d+', '', re.sub(r'\\W+', '', line.strip().lower()))
